@@ -1,15 +1,31 @@
 package model;
 
+import jdk.jfr.Enabled;
+
+import javax.persistence.*;
+
+@Entity
+@Table (name = "employees")
 public class Employee {
 
+    @Id
+    @GeneratedValue (strategy = GenerationType.AUTO)
     private int id;
+    @Column
     private String first_name;
+    @Column
     private String last_name;
+    @Column
     private String gender;
+    @Column
     private int age;
-    private City city;
+    @Column
+    private int city;
 
-    public Employee(int id, String first_name, String last_name, String gender, int age, City city) {
+    public Employee() {
+    }
+
+    public Employee(int id, String first_name, String last_name, String gender, int age, int city) {
         this.id = id;
         this.first_name = first_name;
         this.last_name = last_name;
@@ -18,15 +34,12 @@ public class Employee {
         this.city = city;
     }
 
-    public Employee(String first_name, String last_name, String gender, int age, City city) {
+    public Employee(String first_name, String last_name, String gender, int age, int city) {
         this.first_name = first_name;
         this.last_name = last_name;
         this.gender = gender;
         this.age = age;
         this.city = city;
-    }
-
-    public Employee() {
     }
 
     public void setId(int id) {
@@ -49,7 +62,7 @@ public class Employee {
         this.age = age;
     }
 
-    public void setCity(City city) {
+    public void setCity(int city) {
         this.city = city;
     }
 
@@ -73,7 +86,7 @@ public class Employee {
         return age;
     }
 
-    public City getCity() {
+    public int getCity() {
         return city;
     }
 
