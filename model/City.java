@@ -1,30 +1,58 @@
 package model;
 
+import javax.persistence.*;
+import java.util.List;
+
+@Entity
+@Table(name = "city")
 public class City {
 
-    private int city_id;
-    private String city_name;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column (name = "city_id")
+    private int cityId;
+    @Column (name = "city_name")
+    private String cityName;
+    @OneToMany(mappedBy = "city", cascade = CascadeType.ALL)
+    private List<Employee> employees;
 
-
-    public City(int city_id, String city_name) {
-        this.city_id = city_id;
-        this.city_name = city_name;
+    public City() {
     }
 
-    public City(int city_id) {
-        this.city_id = city_id;
+    public City(String cityName) {
+        this.cityName = cityName;
     }
 
-    public int getCity_id() {
-        return city_id;
+    public City(int cityId) {
+        this.cityId = cityId;
     }
 
-    public String getCity_name() {
-        return city_name;
+    public int getCityId() {
+        return cityId;
+    }
+
+    public void setCityId(int cityId) {
+        this.cityId = cityId;
+    }
+
+    public String getCityName() {
+        return cityName;
+    }
+
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
+    }
+
+    public List<Employee> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(List<Employee> employees) {
+        this.employees = employees;
     }
 
     @Override
     public String toString() {
-        return city_id + " " + city_name;
+        return cityId + " " + cityName;
     }
 }
