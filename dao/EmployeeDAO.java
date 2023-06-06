@@ -3,6 +3,7 @@ package dao;
 import model.Employee;
 
 import java.util.Collection;
+import java.util.List;
 
 public interface EmployeeDAO {
 
@@ -10,9 +11,9 @@ public interface EmployeeDAO {
 
     Employee getById (int id);
 
-    Collection<Employee> findAllEmployee ();
+    List<Employee> findAllEmployee ();
 
     void changeEmployee (int id, Employee employee);
 
-    void deleteEmployee (int id);
+    void deleteEmployee (Employee employee);
 }
