@@ -5,38 +5,30 @@ import jdk.jfr.Enabled;
 import javax.persistence.*;
 
 @Entity
-@Table (name = "employees")
+@Table (name = "employee")
 public class Employee {
 
     @Id
     @GeneratedValue (strategy = GenerationType.AUTO)
     private int id;
-    @Column
-    private String first_name;
-    @Column
-    private String last_name;
+    @Column (name = "first_name")
+    private String firstName;
+    @Column (name = "last_name")
+    private String lastName;
     @Column
     private String gender;
     @Column
     private int age;
-    @Column
-    private int city;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "city_id")
+    private City city;
 
     public Employee() {
     }
 
-    public Employee(int id, String first_name, String last_name, String gender, int age, int city) {
-        this.id = id;
-        this.first_name = first_name;
-        this.last_name = last_name;
-        this.gender = gender;
-        this.age = age;
-        this.city = city;
-    }
-
-    public Employee(String first_name, String last_name, String gender, int age, int city) {
-        this.first_name = first_name;
-        this.last_name = last_name;
+    public Employee(String firstName, String lastName, String gender, int age, City city) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.gender = gender;
         this.age = age;
         this.city = city;
@@ -46,12 +38,12 @@ public class Employee {
         this.id = id;
     }
 
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
+    public void setFirstName(String first_name) {
+        this.firstName = first_name;
     }
 
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
+    public void setLastName(String last_name) {
+        this.lastName = last_name;
     }
 
     public void setGender(String gender) {
@@ -62,7 +54,7 @@ public class Employee {
         this.age = age;
     }
 
-    public void setCity(int city) {
+    public void setCity(City city) {
         this.city = city;
     }
 
@@ -70,12 +62,12 @@ public class Employee {
         return id;
     }
 
-    public String getFirst_name() {
-        return first_name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public String getLast_name() {
-        return last_name;
+    public String getLastName() {
+        return lastName;
     }
 
     public String getGender() {
@@ -86,12 +78,12 @@ public class Employee {
         return age;
     }
 
-    public int getCity() {
+    public City getCity() {
         return city;
     }
 
     @Override
     public String toString() {
-        return id + " " + first_name + " " + last_name + " " + gender + " " + age + " " + city + "\n";
+        return id + " " + firstName + " " + lastName + " " + gender + " " + age + " " + city + "\n";
     }
 }
